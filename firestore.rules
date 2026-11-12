@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Restaurant Settings (Public Read, Write for App Management)
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Menu items and prices (Public Read for all clients, Write for owner updates)
+    match /menu/{dishId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Customer accounts and profiles
+    match /customers/{customerId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Orders placed by customers
+    match /orders/{orderId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

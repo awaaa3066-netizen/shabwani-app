@@ -1,0 +1,6 @@
+{
+  "name": "مطعم الذوق الشبواني",
+  "description": "تطبيق الطلبات الإلكتروني لمطعم الذوق الشبواني - طلبات أونلاين، دفع شبكة وعند الاستلام، وتعديل أسعار الأطباق",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

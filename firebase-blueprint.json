@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "RestaurantSettings": {
+      "title": "RestaurantSettings",
+      "description": "Store restaurant configuration, phone, location, pricing parameters and owner bank IBAN details",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "address": { "type": "string" },
+        "deliveryFee": { "type": "number" },
+        "freeDeliveryThreshold": { "type": "number" },
+        "workingHours": { "type": "string" },
+        "bankName": { "type": "string" },
+        "bankIban": { "type": "string" },
+        "bankAccountName": { "type": "string" },
+        "pinCode": { "type": "string" },
+        "currency": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "phone", "address", "pinCode"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Menu dish item with owner-configured price and details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "isAvailable": { "type": "boolean" },
+        "badge": { "type": "string" },
+        "preparationTime": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "price", "image", "isAvailable"]
+    },
+    "CustomerProfile": {
+      "title": "CustomerProfile",
+      "description": "Customer account details saved upon first registration for fast checkout",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with itemized invoice and bank deposit details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "orderType": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "bankTransferRef": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "customerName", "customerPhone", "total", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/settings/main": {
+      "schema": "RestaurantSettings",
+      "description": "Central restaurant settings and merchant bank details"
+    },
+    "/menu/{dishId}": {
+      "schema": "MenuItem",
+      "description": "Dishes and customizable pricing synced to all clients"
+    },
+    "/customers/{customerId}": {
+      "schema": "CustomerProfile",
+      "description": "Registered customer profiles"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders stream and live status tracking"
+    }
+  }
+}
